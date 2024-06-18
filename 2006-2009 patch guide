@@ -1,0 +1,68 @@
+this is a patching guide for the Roblox clients published between 2006-2009
+a few things you need to take into consideration before patching..
+
+you have to understand that the client probably already works as you downloaded it, but there are some things you have to patch if you want a revival or some things to work in your client
+
+you will need the following applications:
+resource hacker: https://www.angusj.com/resourcehacker/
+x64dbg: https://x64dbg.com/ (i am using snapshot_2022-03-26_14-14 on windows)
+
+you can find a list of clients here:
+https://drive.google.com/drive/folders/1lu1Ex6Z6D0TWUmqikrwD6tSDwVPTRze3?usp=drive_link
+
+step 1 | download a client
+go to the google drive folder and navigate to the clients section
+pick a client between 2007 to 2009 (2007, 2008 or 2009)
+for this tutorial i will be using 2007, so if this is your first time, i would recommend that aswell
+pick a month, the options given for 2007 (what i am using) are 3/march, 8/august, 11/november, 12/december; i am using august or 8.2007
+now download it by right clicking and pressing download, it will take a minute so just wait
+once it is downloaded, unzip it to a folder wherever is comfortable, and there you have it: your client of choice
+
+step 2 | prepping debugger
+open x32dbg.exe, if you haven't installed it already, then you haven't been paying attention, go back to the top plz
+once you are in the debugger (x32dbg) go to the top left where it says file, then open, and locate the Roblox.exe file in your client folder, then open that
+you should be met with a lot of random letters and numbers and a lot of different panels, ignore all of that and find the symbols tab in the tab section, the paper with the red dot
+double click where it says roblox.exe in the symbols area
+at the toolbar above the tabs, find the A₂ button and click it, wait for it to load in
+
+step 3 | patching player names (important for revivals)
+at the search prompt at the bottom above the progress bar, search for "set a Player's name", there should be 2 responses that look like clones; double click the top one
+in the main panel in the middle you should be selected or focused on a line saying push roblox.79B3BC and next to it in orange saying something along the lines of "set a Player's name"
+go down one line where it says push and then a number (number may vary by client month or year), select that line and press space
+replace 0x1 (or whatever number you have) with 0x0 then press OK, then press cancel if you are stuck on the next line
+go to the references tab (same area as symbols tab) and go to the second set a Player's name, and repeat the same process
+
+step 4 | completing patch
+press control + P OR go to file at the top left and press patch file
+at the bottom right of the patching panel, press Patch File
+name it to whatever you want except Roblox obviously, and it MUST end in .exe
+you may now close the debugger
+
+step 5 | rebranding and configuring the client (THIS IS TO REBRAND THE CLIENT TO A REVIVAL NAME OR IF YOU JUST WANT TO CHANGE THE TITLES AND PICTURES FROM ROBLOX TO YOUR OWN THING) 
+open resource hacker, press the open file button and open your patched client
+press the search button and search for files using "Roblox" in them
+once done configuring a file, click on the next, it should ask you to compile, so press Compile
+the main folders you need to really check are REGISTRY, Menu, String Table, Version Info
+when you get to StringTable, 9:1033; replace the line that starts with 132 completely with "132, 	"Images (*.jpg;*.jpeg;*.tga;*.bmp;*.ico;*.png)All Files (*.*)|*.*||""
+if you want to change the icon, go to the Icon folder and change the 1033's 1-10 to your icon which should be a .ico file
+once done replacing all of the Roblox's with your thing, do CTRL+S or press save in file
+you can now close resource hacker
+
+step 6 | testing the client
+you can test the client by opening it
+if you did step 5 your first look should be at the icons and title (or whichever part you changed) to ensure you did it right
+if you have a place/.rbxl file; go ahead and open it, im using "1George's Place (v1)"
+the place file must be equivalent or earlier in time frame compared to your client, or marked universal
+some places dont have a spawn object so insert one and locate it to wherever you need
+go to the command bar at the bottom of your client and run the following commands to playtest
+
+game.Players.LocalPlayer:LoadCharacter()
+game.Players:CreateLocalPlayer(0)
+game.Players.LocalPlayer:LoadCharacter()
+
+now you should be able to move around however you want!
+if you want to chat and use it more in depth as if it was a real game
+insert the "NetworkClient" object, and it should automatically fullscreen you and get you the chat and health UIs
+
+you can have fun now goodbye
+if there's something inaccurate or something i should add please let me know because i really will not just add things as i go
