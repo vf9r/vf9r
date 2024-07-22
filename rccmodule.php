@@ -3,8 +3,8 @@ session_start();
 ini_set('display_errors',1);
 
 $sesid = rand(1, 1000000);
-$jobexpiration = 100; # seconds
-$baseurl = "http://roblox.com/"; # the domain duh
+$jobexpiration = 100;
+$baseurl = "http://roblox.com/";
 
 $id = $_SESSION['id'];
 
@@ -80,7 +80,6 @@ plr.Character["Right Arm"].BrickColor = BrickColor.new('. $rightarmColor .')
         return result';
 }
 
-# ignore this lmao
 $xml = '<?xml version="1.0" encoding="UTF-8"?>
 <SOAP-ENV:Envelope 
     xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
@@ -103,7 +102,6 @@ $xml = '<?xml version="1.0" encoding="UTF-8"?>
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>';
 
-# curl thingy
 $curl = curl_init();
 curl_setopt_array($curl, array(
     CURLOPT_URL => "localhost", # change this to your rcc vps and port
@@ -120,13 +118,7 @@ if ($response === false) {
     echo "Error drawing your character 1...\n";
     echo $response;
     sleep(1);
-    echo "\nRedirecting..";
-    sleep(5);
-    #echo "<script>
-    #window.location = '/my/Character.php';
-    #</script>";
 } else {
-    # annoying shit
     $pos_start = strpos($response, '<ns1:value>') + strlen('<ns1:value>');
     $pos_end = strpos($response, '</ns1:value>', $pos_start);
     
@@ -142,10 +134,6 @@ if ($response === false) {
         echo "VARIABLE POS_START AND POS_END ARE EQUAL TO FALSE";
         sleep(1);
         echo "\nRedirecting..";
-        sleep(5);
-        #echo "<script>
-        #window.location = '/my/Character.php';
-        #</script>";
     }
 }
 
