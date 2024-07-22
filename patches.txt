@@ -1,1 +1,15 @@
+2008
+set a Player's name
+push 0x3 -> 0x0 (x2)
 
+connect to an extranet game
+push 0x4 -> 0x0
+
+HtmlService
+je/jne -> jmp (x1)
+
+ioEnabled
+push 0x4 -> ret
+
+SiteUrl
+jne -> jmp (high up) (x1)
